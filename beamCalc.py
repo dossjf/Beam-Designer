@@ -119,9 +119,6 @@ def beamCalcI(beam):
     else:
         print("Glue does not fail in shear within test range.")
 
-    ################# DEFLECTION CALCULATION ####################
-    #Leaving this one up to someone else.
-
     ################# DOMINANT FAILURE MODE AND LOCATION ####################
     #Calculate where the beam fails, how it fails (which mode).
     print("---Computing Failure Mode and Delta---")
@@ -141,6 +138,8 @@ def beamCalcI(beam):
     print("Beam Mass is: " + str(round(Mass,2)) + " lbs.")
     print("Strength to Weight Ratio is: " + str(round(A/Mass,2)) + ".")
 
+    MaxDeflection = ((-A*8*12)/(6*E_chosen*I_zc*20))*(20^2-8^2-12^2)
+    print("Max Deflection is: " + str(round(MaxDeflection,3)) + " in.")
     return 1
 
 def paramCheck(beam):
@@ -181,8 +180,7 @@ def beamDesign(beam):
         beamCalcI(beam)
     return 1
 
-beamDesign([2,0.5,2,0.25,0,0])
-
+beamDesign([1.375,0.25,1.0625,0.3125,0,1])
 #Feed in basic dimensions: [Web Height, Web Thickness, Flange Width, Flange Thickness, Web Material, Flange Material]
 #All dims given in inches. Returns are in lbf. Material Options are 0 for Oak, 1 for Pine. Beam Options are 0 for a standard I beam and 1 for an inverted T beam.
 #To run this program simply input your desired beam dimensions in the format given in the line directly above. If you are getting errors try checking the load simulation range (by default 0 lbs to 500000lbs).
